@@ -45,9 +45,16 @@ body {
 }
 
 .nav-logo h2 {
-    color: #2563eb;
     font-weight: 700;
     font-size: 1.5rem;
+}
+
+.nav-vision-text {
+    color: #000000;
+}
+
+.nav-number-text {
+    color: #ff0000;
 }
 
 .nav-menu {
@@ -141,15 +148,6 @@ body {
             z-index: 10;
             text-align: center;
             padding: 60px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.08),
-                0 4px 16px rgba(0, 0, 0, 0.06),
-                0 2px 8px rgba(0, 0, 0, 0.04),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
 .main-logo {
@@ -294,19 +292,13 @@ body {
             width: 120%;
             height: 120%;
             background: radial-gradient(circle, 
-                rgba(255, 255, 255, 0.4) 0%, 
-                rgba(255, 255, 255, 0.2) 30%, 
-                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.2) 0%, 
+                rgba(255, 255, 255, 0.1) 30%, 
                 transparent 70%);
             transform: translate(-50%, -50%);
             z-index: -1;
             animation: glowPulse 6s ease-in-out infinite;
             border-radius: 50%;
-            -webkit-backdrop-filter: blur(1px);
-            backdrop-filter: blur(1px);
-            box-shadow: 
-                0 0 60px rgba(255, 255, 255, 0.3),
-                0 0 120px rgba(255, 255, 255, 0.1);
         }
 
 @keyframes glowPulse {
