@@ -19,6 +19,7 @@
     <meta name="twitter:title" content="Blog - AI Solutions & Caribbean Business Insights | Vision79">
     <meta name="twitter:description" content="Discover AI insights, Caribbean business strategies, and digital transformation tips from Vision79.">
     
+    <link rel="stylesheet" href="design-system.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -32,34 +33,61 @@
     </script>
     
     <style>
+        /* Blog-specific styles using design system tokens */
         .blog-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 0;
+            background: var(--gradient-hero);
+            color: var(--color-white);
+            padding: var(--spacing-3xl) 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .blog-header .container {
+            position: relative;
+            z-index: 2;
         }
         
         .blog-header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--color-white) 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .blog-header p {
-            font-size: 1.2rem;
+            font-size: var(--spacing-lg);
             opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .blog-filters {
-            background: white;
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: var(--color-white);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-light);
         }
         
         .filter-controls {
             display: flex;
-            gap: 1rem;
+            gap: var(--spacing-md);
             flex-wrap: wrap;
             align-items: center;
         }
@@ -71,10 +99,18 @@
         
         .search-box input {
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            padding: var(--spacing-md);
+            border: 2px solid var(--color-light);
+            border-radius: var(--radius-md);
             font-size: 1rem;
+            transition: var(--transition-normal);
+            background: var(--color-white);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--color-secondary);
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
         }
         
         .category-filter {
@@ -83,127 +119,190 @@
         
         .category-filter select {
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            padding: var(--spacing-md);
+            border: 2px solid var(--color-light);
+            border-radius: var(--radius-md);
             font-size: 1rem;
+            transition: var(--transition-normal);
+            background: var(--color-white);
+            cursor: pointer;
+        }
+        
+        .category-filter select:focus {
+            outline: none;
+            border-color: var(--color-secondary);
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
         }
         
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
         }
         
         .blog-card {
-            background: white;
-            border-radius: 15px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-normal);
+            border: 1px solid var(--color-light);
+            position: relative;
+        }
+        
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
         }
         
         .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
         }
         
         .blog-image {
             height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--color-white);
             font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: var(--transition-slow);
+        }
+        
+        .blog-card:hover .blog-image::before {
+            transform: translateX(100%);
         }
         
         .blog-content {
-            padding: 1.5rem;
+            padding: var(--spacing-xl);
         }
         
         .blog-content h3 {
-            margin: 0 0 1rem 0;
+            margin: 0 0 var(--spacing-md) 0;
             font-size: 1.3rem;
-            color: #333;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-dark);
+            line-height: 1.3;
         }
         
         .blog-content p {
-            color: #666;
+            color: var(--color-gray);
             line-height: 1.6;
-            margin-bottom: 1rem;
+            margin-bottom: var(--spacing-md);
         }
         
         .blog-meta {
             display: flex;
-            gap: 1rem;
+            gap: var(--spacing-md);
             font-size: 0.9rem;
-            color: #888;
-            margin-bottom: 1rem;
+            color: var(--color-gray);
+            margin-bottom: var(--spacing-md);
+            flex-wrap: wrap;
         }
         
         .blog-meta span {
             display: flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: var(--spacing-xs);
+            background: var(--color-light);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
         }
         
         .blog-link {
-            color: #667eea;
+            color: var(--color-secondary);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: var(--font-weight-semibold);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: color 0.3s ease;
+            gap: var(--spacing-sm);
+            transition: var(--transition-normal);
+            padding: var(--spacing-sm) 0;
         }
         
         .blog-link:hover {
-            color: #764ba2;
+            color: var(--color-primary);
+            transform: translateX(4px);
         }
         
         .blog-tags {
-            margin-top: 1rem;
+            margin-top: var(--spacing-md);
         }
         
         .tag {
             display: inline-block;
-            background: #f0f4ff;
-            color: #667eea;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
+            background: var(--color-light);
+            color: var(--color-secondary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-md);
             font-size: 0.8rem;
-            margin: 0.25rem;
+            margin: var(--spacing-xs);
+            transition: var(--transition-normal);
+            text-decoration: none;
+        }
+        
+        .tag:hover {
+            background: var(--color-secondary);
+            color: var(--color-white);
+            transform: translateY(-2px);
         }
         
         .no-posts {
             text-align: center;
-            padding: 4rem 2rem;
-            color: #666;
+            padding: var(--spacing-3xl) var(--spacing-xl);
+            color: var(--color-gray);
         }
         
         .no-posts i {
             font-size: 4rem;
-            color: #ddd;
-            margin-bottom: 1rem;
+            color: var(--color-light);
+            margin-bottom: var(--spacing-md);
         }
         
         .admin-link {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: #667eea;
-            color: white;
-            padding: 1rem;
+            bottom: var(--spacing-xl);
+            right: var(--spacing-xl);
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            padding: var(--spacing-md);
             border-radius: 50px;
             text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-normal);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
         }
         
         .admin-link:hover {
-            transform: translateY(-2px);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: var(--shadow-xl);
         }
         
         @media (max-width: 768px) {
@@ -225,9 +324,11 @@
             }
             
             .admin-link {
-                bottom: 1rem;
-                right: 1rem;
-                padding: 0.75rem;
+                bottom: var(--spacing-md);
+                right: var(--spacing-md);
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -306,23 +407,13 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Vision79</h3>
-                    <p>Empowering Caribbean businesses with AI solutions for growth and efficiency.</p>
+                    <p>AI Solutions for Small Businesses in St. Lucia and the Caribbean</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="index.html#testimonials">Testimonials</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
-                    </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Services</h4>
@@ -330,16 +421,23 @@
                         <li><a href="index.html#services">AI Consulting</a></li>
                         <li><a href="index.html#services">Process Automation</a></li>
                         <li><a href="index.html#services">Data Analytics</a></li>
-                        <li><a href="index.html#services">Customer Service AI</a></li>
-                        <li><a href="index.html#services">Predictive Analytics</a></li>
-                        <li><a href="index.html#services">Custom AI Solutions</a></li>
+                        <li><a href="index.html#services">Chatbot Development</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#testimonials">Case Studies</a></li>
+                        <li><a href="index.html#contact">Free Consultation</a></li>
+                        <li><a href="index.html#lead-magnet">AI Readiness Guide</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Contact</h4>
-                    <p><i class="fas fa-map-marker-alt"></i> Gros-Islet, St. Lucia</p>
                     <p><i class="fas fa-phone"></i> +1 (758) 726-0035</p>
                     <p><i class="fas fa-envelope"></i> vision79slu@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Gros-Islet, St. Lucia</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -348,29 +446,29 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="enhanced-script.js"></script>
     <script>
         // Blog post management
         let blogPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
         let filteredPosts = [...blogPosts];
-        
+
         // Load blog posts
         function loadBlogPosts() {
             const blogGrid = document.getElementById('blogGrid');
             blogGrid.innerHTML = '';
-            
+
             if (filteredPosts.length === 0) {
                 blogGrid.innerHTML = `
                     <div class="no-posts">
                         <i class="fas fa-newspaper"></i>
                         <h3>No blog posts found</h3>
-                        <p>Start writing your first blog post to share insights with your audience.</p>
-                        <a href="blog-editor.html" class="btn btn-primary">Write Your First Post</a>
+                        <p>Start writing your first blog post!</p>
+                        <a href="blog-editor.html" class="btn btn-primary">Create Post</a>
                     </div>
                 `;
                 return;
             }
-            
+
             filteredPosts.forEach(post => {
                 const postElement = document.createElement('article');
                 postElement.className = 'blog-card';
@@ -400,38 +498,39 @@
                 blogGrid.appendChild(postElement);
             });
         }
-        
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            filterPosts();
-        });
-        
-        // Category filter
-        document.getElementById('categoryFilter').addEventListener('change', function() {
-            filterPosts();
-        });
-        
+
+        // Filter posts
         function filterPosts() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const categoryFilter = document.getElementById('categoryFilter').value;
-            
+
             filteredPosts = blogPosts.filter(post => {
                 const matchesSearch = post.title.toLowerCase().includes(searchTerm) ||
                                     post.content.toLowerCase().includes(searchTerm) ||
-                                    post.excerpt.toLowerCase().includes(searchTerm) ||
                                     (post.tags && post.tags.toLowerCase().includes(searchTerm));
                 
                 const matchesCategory = !categoryFilter || post.category === categoryFilter;
                 
                 return matchesSearch && matchesCategory;
             });
-            
+
             loadBlogPosts();
         }
-        
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            filterPosts();
+        });
+
+        // Category filter
+        document.getElementById('categoryFilter').addEventListener('change', function() {
+            filterPosts();
+        });
+
         // Load posts on page load
-        document.addEventListener('DOMContentLoaded', loadBlogPosts);
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBlogPosts();
+        });
     </script>
 </body>
 </html>

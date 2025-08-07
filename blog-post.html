@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Post | Vision79</title>
+    <link rel="stylesheet" href="design-system.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -17,100 +18,136 @@
     </script>
     
     <style>
+        /* Blog post specific styles using design system tokens */
         .post-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 0;
+            background: var(--gradient-hero);
+            color: var(--color-white);
+            padding: var(--spacing-3xl) 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .post-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .post-header .container {
+            position: relative;
+            z-index: 2;
         }
         
         .post-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-md);
             line-height: 1.2;
+            background: linear-gradient(135deg, var(--color-white) 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .post-meta {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: var(--spacing-xl);
             flex-wrap: wrap;
-            margin-top: 1rem;
+            margin-top: var(--spacing-md);
             opacity: 0.9;
         }
         
         .post-meta span {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: var(--spacing-sm);
+            background: rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         
         .post-content {
             max-width: 800px;
             margin: 0 auto;
-            padding: 3rem 0;
+            padding: var(--spacing-3xl) 0;
         }
         
         .post-content p {
             font-size: 1.1rem;
             line-height: 1.8;
-            margin-bottom: 1.5rem;
-            color: #333;
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-dark);
         }
         
         .post-content h2 {
             font-size: 1.8rem;
-            color: #333;
-            margin: 2rem 0 1rem 0;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 0.5rem;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-dark);
+            margin: var(--spacing-xl) 0 var(--spacing-md) 0;
+            border-bottom: 2px solid var(--color-secondary);
+            padding-bottom: var(--spacing-sm);
         }
         
         .post-content h3 {
             font-size: 1.4rem;
-            color: #444;
-            margin: 1.5rem 0 1rem 0;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-dark);
+            margin: var(--spacing-lg) 0 var(--spacing-md) 0;
         }
         
         .post-content ul, .post-content ol {
-            margin: 1rem 0;
-            padding-left: 2rem;
+            margin: var(--spacing-md) 0;
+            padding-left: var(--spacing-xl);
         }
         
         .post-content li {
-            margin-bottom: 0.5rem;
+            margin-bottom: var(--spacing-sm);
             line-height: 1.6;
+            color: var(--color-dark);
         }
         
         .post-tags {
-            margin: 2rem 0;
-            padding: 1rem;
-            background: #f8fafc;
-            border-radius: 8px;
+            margin: var(--spacing-xl) 0;
+            padding: var(--spacing-md);
+            background: var(--color-light);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-light);
         }
         
         .tag {
             display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            background: var(--color-secondary);
+            color: var(--color-white);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
             font-size: 0.9rem;
-            margin: 0.25rem;
+            margin: var(--spacing-xs);
             text-decoration: none;
+            transition: var(--transition-normal);
         }
         
         .tag:hover {
-            background: #764ba2;
+            background: var(--color-primary);
+            transform: translateY(-2px);
         }
         
         .post-navigation {
             max-width: 800px;
-            margin: 3rem auto;
-            padding: 2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: var(--spacing-3xl) auto;
+            padding: var(--spacing-xl);
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-light);
         }
         
         .nav-links {
@@ -122,69 +159,97 @@
         .nav-link {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: #667eea;
+            gap: var(--spacing-sm);
+            color: var(--color-secondary);
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-normal);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
         }
         
         .nav-link:hover {
-            color: #764ba2;
+            color: var(--color-primary);
+            background: var(--color-light);
+            transform: translateX(4px);
         }
         
         .nav-link.prev {
             flex-direction: row-reverse;
         }
         
+        .nav-link.prev:hover {
+            transform: translateX(-4px);
+        }
+        
         .post-not-found {
             text-align: center;
-            padding: 4rem 2rem;
-            color: #666;
+            padding: var(--spacing-3xl) var(--spacing-xl);
+            color: var(--color-gray);
         }
         
-        .post-not-found i {
-            font-size: 4rem;
-            color: #ddd;
-            margin-bottom: 1rem;
+        .post-not-found h3 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-dark);
         }
         
-        .share-buttons {
-            margin: 2rem 0;
+        .post-not-found p {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .social-sharing {
+            margin: var(--spacing-xl) 0;
+            padding: var(--spacing-lg);
+            background: var(--color-light);
+            border-radius: var(--radius-md);
             text-align: center;
         }
         
-        .share-button {
+        .social-sharing h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--color-dark);
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+        
+        .social-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            margin: 0.5rem;
-            border-radius: 25px;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
             text-decoration: none;
-            color: white;
-            font-weight: 600;
-            transition: transform 0.3s ease;
+            color: var(--color-white);
+            font-weight: var(--font-weight-medium);
+            transition: var(--transition-normal);
         }
         
-        .share-button:hover {
-            transform: translateY(-2px);
-        }
-        
-        .share-facebook {
+        .social-btn.facebook {
             background: #1877f2;
         }
         
-        .share-twitter {
+        .social-btn.twitter {
             background: #1da1f2;
         }
         
-        .share-linkedin {
+        .social-btn.linkedin {
             background: #0077b5;
         }
         
-        .share-whatsapp {
+        .social-btn.whatsapp {
             background: #25d366;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
         
         @media (max-width: 768px) {
@@ -194,16 +259,17 @@
             
             .post-meta {
                 flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .post-content {
-                padding: 2rem 1rem;
+                gap: var(--spacing-sm);
             }
             
             .nav-links {
                 flex-direction: column;
-                gap: 1rem;
+                gap: var(--spacing-md);
+            }
+            
+            .social-buttons {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -237,7 +303,7 @@
     <section class="post-header">
         <div class="container">
             <div id="postTitle">
-                <h1>Loading...</h1>
+                <!-- Post title will be loaded here -->
             </div>
             <div id="postMeta" class="post-meta">
                 <!-- Post meta will be loaded here -->
@@ -256,20 +322,22 @@
                 <!-- Tags will be loaded here -->
             </div>
             
-            <div class="share-buttons">
-                <h3>Share this post:</h3>
-                <a href="#" class="share-button share-facebook" onclick="shareOnFacebook()">
-                    <i class="fab fa-facebook-f"></i> Facebook
-                </a>
-                <a href="#" class="share-button share-twitter" onclick="shareOnTwitter()">
-                    <i class="fab fa-twitter"></i> Twitter
-                </a>
-                <a href="#" class="share-button share-linkedin" onclick="shareOnLinkedIn()">
-                    <i class="fab fa-linkedin-in"></i> LinkedIn
-                </a>
-                <a href="#" class="share-button share-whatsapp" onclick="shareOnWhatsApp()">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
+            <div class="social-sharing">
+                <h4>Share this post</h4>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn facebook" onclick="shareOnFacebook()">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </a>
+                    <a href="#" class="social-btn twitter" onclick="shareOnTwitter()">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="#" class="social-btn linkedin" onclick="shareOnLinkedIn()">
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <a href="#" class="social-btn whatsapp" onclick="shareOnWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -282,7 +350,7 @@
                     <i class="fas fa-arrow-left"></i> Back to Blog
                 </a>
                 <a href="index.html#contact" class="nav-link">
-                    Get Free Consultation <i class="fas fa-arrow-right"></i>
+                    Book Free Consultation <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -294,23 +362,13 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Vision79</h3>
-                    <p>Empowering Caribbean businesses with AI solutions for growth and efficiency.</p>
+                    <p>AI Solutions for Small Businesses in St. Lucia and the Caribbean</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="index.html#testimonials">Testimonials</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
-                    </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Services</h4>
@@ -318,16 +376,23 @@
                         <li><a href="index.html#services">AI Consulting</a></li>
                         <li><a href="index.html#services">Process Automation</a></li>
                         <li><a href="index.html#services">Data Analytics</a></li>
-                        <li><a href="index.html#services">Customer Service AI</a></li>
-                        <li><a href="index.html#services">Predictive Analytics</a></li>
-                        <li><a href="index.html#services">Custom AI Solutions</a></li>
+                        <li><a href="index.html#services">Chatbot Development</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#testimonials">Case Studies</a></li>
+                        <li><a href="index.html#contact">Free Consultation</a></li>
+                        <li><a href="index.html#lead-magnet">AI Readiness Guide</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Contact</h4>
-                    <p><i class="fas fa-map-marker-alt"></i> Gros-Islet, St. Lucia</p>
                     <p><i class="fas fa-phone"></i> +1 (758) 726-0035</p>
                     <p><i class="fas fa-envelope"></i> vision79slu@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Gros-Islet, St. Lucia</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -336,7 +401,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="enhanced-script.js"></script>
     <script>
         // Get post slug from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -391,8 +456,8 @@
             // Track page view
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'blog_post_view', {
-                    'event_category': 'engagement',
-                    'event_label': post.slug
+                    'event_category': 'blog',
+                    'event_label': post.title
                 });
             }
         }
@@ -413,7 +478,6 @@
             document.getElementById('postTitle').innerHTML = '<h1>Post Not Found</h1>';
             document.getElementById('postContent').innerHTML = `
                 <div class="post-not-found">
-                    <i class="fas fa-search"></i>
                     <h3>Blog post not found</h3>
                     <p>The blog post you're looking for doesn't exist or has been removed.</p>
                     <a href="blog.html" class="btn btn-primary">Back to Blog</a>
@@ -421,17 +485,17 @@
             `;
         }
         
-        // Share functions
+        // Social sharing functions
         function shareOnFacebook() {
             const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(document.title);
+            const title = encodeURIComponent(document.title);
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
         }
         
         function shareOnTwitter() {
             const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(document.title);
-            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+            const title = encodeURIComponent(document.title);
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');
         }
         
         function shareOnLinkedIn() {
@@ -442,11 +506,11 @@
         
         function shareOnWhatsApp() {
             const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(document.title);
-            window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+            const title = encodeURIComponent(document.title);
+            window.open(`https://wa.me/?text=${title}%20${url}`, '_blank');
         }
         
-        // Load post on page load
+        // Load post when page loads
         document.addEventListener('DOMContentLoaded', loadPost);
     </script>
 </body>
