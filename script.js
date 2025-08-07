@@ -62,7 +62,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for scroll animations
 document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.service-card, .stat, .contact-item, .section-header, .faq-item, .feature');
+    const animateElements = document.querySelectorAll('.service-card, .stat, .contact-item, .section-header, .faq-item, .feature, .testimonial-card, .blog-card');
     animateElements.forEach(el => {
         if (el) {
             el.classList.add('scroll-animate');
@@ -98,8 +98,20 @@ if (contactForm) {
         }
         
         // Simulate form submission (replace with actual form handling)
-        alert('Thank you for your message! We will get back to you soon.');
-        this.reset();
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        
+        // Show loading state
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+            this.reset();
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        }, 2000);
     });
 }
 
