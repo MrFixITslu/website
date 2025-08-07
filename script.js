@@ -62,7 +62,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for scroll animations
 document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.service-card, .stat, .contact-item, .section-header');
+    const animateElements = document.querySelectorAll('.service-card, .stat, .contact-item, .section-header, .faq-item, .feature');
     animateElements.forEach(el => {
         if (el) {
             el.classList.add('scroll-animate');
@@ -198,7 +198,29 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// CTA Button Pulse Animation - moved inside DOMContentLoaded
+// FAQ Section Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        
+        if (question && answer) {
+            question.addEventListener('click', () => {
+                // Close all other FAQ items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        }
+    });
+});
 
 // Exit Intent Popup (Basic Implementation)
 let hasShownExitIntent = false;
@@ -244,5 +266,65 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Don't prevent default - let the mailto link work naturally
             });
         }
+    });
+});
+
+// Enhanced scroll animations for new sections
+document.addEventListener('DOMContentLoaded', () => {
+    // Animate FAQ items on scroll
+    const faqObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'all 0.5s ease';
+        faqObserver.observe(item);
+    });
+});
+
+// Service card hover effects
+document.addEventListener('DOMContentLoaded', () => {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+});
+
+
+
+// Smooth reveal animation for about features
+document.addEventListener('DOMContentLoaded', () => {
+    const features = document.querySelectorAll('.feature');
+    
+    const featureObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                }, index * 200);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    features.forEach(feature => {
+        feature.style.opacity = '0';
+        feature.style.transform = 'translateX(-30px)';
+        feature.style.transition = 'all 0.6s ease';
+        featureObserver.observe(feature);
     });
 });
