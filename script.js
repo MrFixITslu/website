@@ -17,7 +17,14 @@ document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+        
+        // Skip if href is just "#" or empty
+        if (href === '#' || !href || href.length <= 1) {
+            return;
+        }
+        
+        const target = document.querySelector(href);
         if (target) {
             target.scrollIntoView({
                 behavior: 'smooth',
@@ -30,10 +37,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Navbar background on scroll
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
+    if (navbar && window.scrollY > 100) {
         navbar.style.background = 'rgba(255, 255, 255, 0.98)';
         navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-    } else {
+    } else if (navbar) {
         navbar.style.background = 'rgba(255, 255, 255, 0.95)';
         navbar.style.boxShadow = 'none';
     }
@@ -57,8 +64,10 @@ const observer = new IntersectionObserver((entries) => {
 document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll('.service-card, .stat, .contact-item, .section-header');
     animateElements.forEach(el => {
-        el.classList.add('scroll-animate');
-        observer.observe(el);
+        if (el) {
+            el.classList.add('scroll-animate');
+            observer.observe(el);
+        }
     });
 });
 
@@ -189,16 +198,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// CTA Button Pulse Animation
-const ctaButton = document.querySelector('.btn-cta');
-if (ctaButton) {
-    setInterval(() => {
-        ctaButton.style.transform = 'scale(1.05)';
-        setTimeout(() => {
-            ctaButton.style.transform = 'scale(1)';
-        }, 200);
-    }, 3000);
-}
+// CTA Button Pulse Animation - moved inside DOMContentLoaded
 
 // Exit Intent Popup (Basic Implementation)
 let hasShownExitIntent = false;
@@ -215,19 +215,34 @@ document.addEventListener('mouseleave', (e) => {
 // Removed event listener to allow mailto links to work properly
 // The onclick attribute in HTML will handle tracking
 
-// Test CTA button functionality
+// CTA Button functionality
 document.addEventListener('DOMContentLoaded', () => {
-    const ctaButton = document.querySelector('.btn-cta');
-    if (ctaButton) {
-        console.log('CTA button found:', ctaButton);
-        console.log('CTA button href:', ctaButton.href);
-        
-        // Test click functionality
-        ctaButton.addEventListener('click', (e) => {
-            console.log('CTA button clicked successfully');
-            // Don't prevent default - let the mailto link work
-        });
-    } else {
-        console.log('CTA button not found');
-    }
+    const ctaButtons = document.querySelectorAll('.btn-cta, .btn-hero-cta');
+    
+    console.log('Found CTA buttons:', ctaButtons.length);
+    
+    ctaButtons.forEach((button, index) => {
+        if (button) {
+            console.log(`CTA button ${index + 1} found:`, button);
+            console.log(`CTA button ${index + 1} href:`, button.href);
+            console.log(`CTA button ${index + 1} classes:`, button.className);
+            
+            // CTA Button Pulse Animation (only for main CTA button)
+            if (button.classList.contains('btn-cta')) {
+                setInterval(() => {
+                    button.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        button.style.transform = 'scale(1)';
+                    }, 200);
+                }, 3000);
+            }
+            
+            // Add click tracking without interfering with mailto
+            button.addEventListener('click', (e) => {
+                console.log(`CTA button ${index + 1} clicked successfully`);
+                console.log('Button href:', button.href);
+                // Don't prevent default - let the mailto link work naturally
+            });
+        }
+    });
 });
