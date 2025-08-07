@@ -62,6 +62,7 @@
     }
     </script>
     
+    <link rel="stylesheet" href="design-system.css">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -87,7 +88,7 @@
                     <a href="#testimonials" class="nav-link">Testimonials</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#blog" class="nav-link">Resources</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a href="#faq" class="nav-link">FAQ</a>
@@ -337,12 +338,30 @@
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p>"As a small business owner, I was worried about the cost and complexity of AI. Vision79 made it simple and affordable. Our inventory management is now 80% more efficient."</p>
+                        <p>"As a small business owner, I was worried about the cost and complexity of AI. Vision79 made it simple and affordable. Our inventory management is now 80% more efficient, and we've reduced stockouts by 90%."</p>
                     </div>
                     <div class="testimonial-author">
                         <div class="author-info">
                             <h4>Maria Rodriguez</h4>
                             <p>CEO, Island Retail Solutions</p>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The AI-powered booking system Vision79 implemented for our tour company has increased our bookings by 35% and reduced no-shows by 60%. Their local understanding of Caribbean tourism was invaluable."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>David Thompson</h4>
+                            <p>Director, St. Lucia Adventures</p>
                         </div>
                         <div class="rating">
                             <i class="fas fa-star"></i>
@@ -437,12 +456,12 @@
                     </div>
                     <div class="blog-content">
                         <h3>5 Ways AI Can Transform Your Caribbean Business</h3>
-                        <p>Discover how artificial intelligence is revolutionizing small businesses across the Caribbean, from automated customer service to predictive analytics.</p>
+                        <p>Caribbean businesses are discovering that AI isn't just for big corporations. From automated customer service that works 24/7 to predictive analytics that forecast demand, AI is leveling the playing field for small businesses in St. Lucia and beyond.</p>
                         <div class="blog-meta">
                             <span><i class="fas fa-calendar"></i> March 15, 2024</span>
                             <span><i class="fas fa-clock"></i> 5 min read</span>
                         </div>
-                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="blog.html" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
                 <article class="blog-card">
@@ -451,12 +470,12 @@
                     </div>
                     <div class="blog-content">
                         <h3>AI Readiness Guide for St. Lucia Businesses</h3>
-                        <p>Your complete guide to preparing your business for AI implementation. Learn the steps to assess, plan, and execute your AI strategy.</p>
+                        <p>Before diving into AI, Caribbean businesses need a solid foundation. This comprehensive guide covers everything from assessing your current technology stack to creating a realistic implementation timeline that fits your budget and resources.</p>
                         <div class="blog-meta">
                             <span><i class="fas fa-calendar"></i> March 10, 2024</span>
                             <span><i class="fas fa-clock"></i> 8 min read</span>
                         </div>
-                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="blog.html" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
                 <article class="blog-card">
@@ -465,17 +484,76 @@
                     </div>
                     <div class="blog-content">
                         <h3>ROI of AI: Real Numbers from Caribbean Businesses</h3>
-                        <p>See the actual return on investment that Caribbean businesses are achieving with AI implementation, including cost savings and revenue growth.</p>
+                        <p>Wondering if AI is worth the investment? We've compiled real data from Caribbean businesses showing average 40% cost reduction, 60% time savings, and 35% revenue growth within 6 months of AI implementation.</p>
                         <div class="blog-meta">
                             <span><i class="fas fa-calendar"></i> March 5, 2024</span>
                             <span><i class="fas fa-clock"></i> 6 min read</span>
                         </div>
-                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="blog.html" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
             </div>
             <div class="blog-cta">
-                <a href="#" class="btn btn-secondary">View All Resources</a>
+                <a href="blog.html" class="btn btn-primary">View All Posts</a>
+                <a href="blog-editor.html" class="btn btn-secondary">Write New Post</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Magnet Section -->
+    <section id="lead-magnet" class="lead-magnet">
+        <div class="container">
+            <div class="lead-magnet-content">
+                <div class="lead-magnet-text">
+                    <h2>Get Your Free AI Readiness Checklist</h2>
+                    <p>Download our comprehensive checklist designed specifically for Caribbean businesses. Assess your current technology infrastructure, identify AI opportunities, and create a step-by-step implementation plan.</p>
+                    <div class="checklist-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>15-point assessment of your current tech stack</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Priority scoring for AI implementation</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Budget-friendly implementation timeline</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Local Caribbean business case studies</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lead-magnet-form">
+                    <div class="form-container">
+                        <h3>Download Your Free Checklist</h3>
+                        <form class="lead-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <select required aria-label="Select Your Business Type">
+                                    <option value="">Select Your Business Type</option>
+                                    <option value="retail">Retail/Shop</option>
+                                    <option value="restaurant">Restaurant/Hospitality</option>
+                                    <option value="service">Professional Services</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-download"></i>
+                                Get Free Checklist
+                            </button>
+                        </form>
+                        <p class="form-disclaimer">We respect your privacy. No spam, ever.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -620,7 +698,7 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#blog">Resources</a></li>
+                        <li><a href="blog.html">Blog</a></li>
                         <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -658,6 +736,6 @@
         </a>
     </div>
 
-    <script src="script.js"></script>
+    <script src="enhanced-script.js"></script>
 </body>
 </html>

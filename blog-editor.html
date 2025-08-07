@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Editor | Vision79</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .editor-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .editor-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .editor-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            min-height: 300px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #333;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .preview-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 2px dashed #cbd5e0;
+        }
+        
+        .preview-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .blog-list {
+            margin-top: 3rem;
+        }
+        
+        .blog-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .blog-item-info h3 {
+            margin: 0 0 0.5rem 0;
+            color: #333;
+        }
+        
+        .blog-item-meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .blog-item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-danger {
+            background: #e53e3e;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .blog-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-container">
+        <div class="editor-header">
+            <h1><i class="fas fa-edit"></i> Blog Post Editor</h1>
+            <p>Create and manage blog posts for Vision79</p>
+        </div>
+        
+        <div class="editor-form">
+            <form id="blogForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="postTitle">Post Title *</label>
+                        <input type="text" id="postTitle" name="title" required placeholder="Enter your blog post title">
+                    </div>
+                    <div class="form-group">
+                        <label for="postSlug">URL Slug *</label>
+                        <input type="text" id="postSlug" name="slug" required placeholder="url-friendly-title">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="postCategory">Category</label>
+                        <select id="postCategory" name="category">
+                            <option value="ai-solutions">AI Solutions</option>
+                            <option value="caribbean-business">Caribbean Business</option>
+                            <option value="digital-transformation">Digital Transformation</option>
+                            <option value="case-studies">Case Studies</option>
+                            <option value="tips-tricks">Tips & Tricks</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="postAuthor">Author</label>
+                        <input type="text" id="postAuthor" name="author" value="Vision79 Team" placeholder="Author name">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="postExcerpt">Excerpt (Brief Description)</label>
+                    <textarea id="postExcerpt" name="excerpt" rows="3" placeholder="Write a brief description of your blog post..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="postContent">Content *</label>
+                    <textarea id="postContent" name="content" rows="15" required placeholder="Write your blog post content here..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="postTags">Tags (comma separated)</label>
+                        <input type="text" id="postTags" name="tags" placeholder="AI, Caribbean, Business, Technology">
+                    </div>
+                    <div class="form-group">
+                        <label for="postImage">Featured Image URL</label>
+                        <input type="url" id="postImage" name="image" placeholder="https://example.com/image.jpg">
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary" onclick="previewPost()">
+                        <i class="fas fa-eye"></i> Preview
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="savePost()">
+                        <i class="fas fa-save"></i> Save Post
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='index.html'">
+                        <i class="fas fa-home"></i> Back to Site
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="previewSection" class="preview-section" style="display: none;">
+            <h3><i class="fas fa-eye"></i> Preview</h3>
+            <div id="previewContent" class="preview-content"></div>
+        </div>
+        
+        <div class="blog-list">
+            <h2><i class="fas fa-list"></i> Existing Blog Posts</h2>
+            <div id="blogList">
+                <!-- Blog posts will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Blog post management
+        let blogPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+        
+        // Auto-generate slug from title
+        document.getElementById('postTitle').addEventListener('input', function() {
+            const title = this.value;
+            const slug = title.toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            document.getElementById('postSlug').value = slug;
+        });
+        
+        function previewPost() {
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const excerpt = document.getElementById('postExcerpt').value;
+            const author = document.getElementById('postAuthor').value;
+            const category = document.getElementById('postCategory').value;
+            
+            if (!title || !content) {
+                alert('Please fill in the title and content to preview.');
+                return;
+            }
+            
+            const previewHTML = `
+                <article class="blog-post">
+                    <header class="post-header">
+                        <h1>${title}</h1>
+                        <div class="post-meta">
+                            <span><i class="fas fa-user"></i> ${author}</span>
+                            <span><i class="fas fa-folder"></i> ${category}</span>
+                            <span><i class="fas fa-calendar"></i> ${new Date().toLocaleDateString()}</span>
+                        </div>
+                    </header>
+                    
+                    ${excerpt ? `<div class="post-excerpt"><p><em>${excerpt}</em></p></div>` : ''}
+                    
+                    <div class="post-content">
+                        ${content.split('\n').map(paragraph => 
+                            paragraph.trim() ? `<p>${paragraph}</p>` : ''
+                        ).join('')}
+                    </div>
+                </article>
+            `;
+            
+            document.getElementById('previewContent').innerHTML = previewHTML;
+            document.getElementById('previewSection').style.display = 'block';
+        }
+        
+        function savePost() {
+            const form = document.getElementById('blogForm');
+            const formData = new FormData(form);
+            
+            const post = {
+                id: Date.now(),
+                title: formData.get('title'),
+                slug: formData.get('slug'),
+                category: formData.get('category'),
+                author: formData.get('author'),
+                excerpt: formData.get('excerpt'),
+                content: formData.get('content'),
+                tags: formData.get('tags'),
+                image: formData.get('image'),
+                date: new Date().toISOString(),
+                published: true
+            };
+            
+            if (!post.title || !post.content || !post.slug) {
+                alert('Please fill in all required fields (Title, Content, and Slug).');
+                return;
+            }
+            
+            // Check if slug already exists
+            const existingPost = blogPosts.find(p => p.slug === post.slug);
+            if (existingPost) {
+                if (!confirm('A post with this slug already exists. Do you want to update it?')) {
+                    return;
+                }
+                // Update existing post
+                const index = blogPosts.findIndex(p => p.slug === post.slug);
+                blogPosts[index] = { ...blogPosts[index], ...post };
+            } else {
+                // Add new post
+                blogPosts.push(post);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+            
+            alert('Blog post saved successfully!');
+            form.reset();
+            loadBlogPosts();
+        }
+        
+        function loadBlogPosts() {
+            const blogList = document.getElementById('blogList');
+            blogList.innerHTML = '';
+            
+            blogPosts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-item';
+                postElement.innerHTML = `
+                    <div class="blog-item-info">
+                        <h3>${post.title}</h3>
+                        <div class="blog-item-meta">
+                            <span><i class="fas fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
+                            <span><i class="fas fa-user"></i> ${post.author}</span>
+                            <span><i class="fas fa-folder"></i> ${post.category}</span>
+                        </div>
+                    </div>
+                    <div class="blog-item-actions">
+                        <button class="btn btn-small btn-secondary" onclick="editPost('${post.slug}')">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-small btn-danger" onclick="deletePost('${post.slug}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                `;
+                blogList.appendChild(postElement);
+            });
+        }
+        
+        function editPost(slug) {
+            const post = blogPosts.find(p => p.slug === slug);
+            if (!post) return;
+            
+            // Fill form with post data
+            document.getElementById('postTitle').value = post.title;
+            document.getElementById('postSlug').value = post.slug;
+            document.getElementById('postCategory').value = post.category;
+            document.getElementById('postAuthor').value = post.author;
+            document.getElementById('postExcerpt').value = post.excerpt;
+            document.getElementById('postContent').value = post.content;
+            document.getElementById('postTags').value = post.tags;
+            document.getElementById('postImage').value = post.image;
+            
+            // Scroll to form
+            document.querySelector('.editor-form').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function deletePost(slug) {
+            if (confirm('Are you sure you want to delete this blog post?')) {
+                blogPosts = blogPosts.filter(p => p.slug !== slug);
+                localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+                loadBlogPosts();
+                alert('Blog post deleted successfully!');
+            }
+        }
+        
+        // Load existing posts on page load
+        document.addEventListener('DOMContentLoaded', loadBlogPosts);
+    </script>
+</body>
+</html>

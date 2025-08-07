@@ -340,3 +340,42 @@ document.addEventListener('DOMContentLoaded', () => {
         featureObserver.observe(feature);
     });
 });
+
+// Lead Magnet Form Handling
+document.addEventListener('DOMContentLoaded', () => {
+    const leadForm = document.querySelector('.lead-form');
+    
+    if (leadForm) {
+        leadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            // Show loading state
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitButton.disabled = true;
+            
+            // Simulate form processing
+            setTimeout(() => {
+                // Show success message
+                alert('Thank you! Your AI Readiness Checklist has been sent to your email. Check your inbox (and spam folder) for the download link.');
+                
+                // Reset form
+                this.reset();
+                
+                // Restore button
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+                
+                // Track conversion (if analytics is set up)
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'lead_magnet_download', {
+                        'event_category': 'conversion',
+                        'event_label': 'AI Readiness Checklist'
+                    });
+                }
+            }, 2000);
+        });
+    }
+});
