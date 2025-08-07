@@ -188,3 +188,46 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// CTA Button Pulse Animation
+const ctaButton = document.querySelector('.btn-cta');
+if (ctaButton) {
+    setInterval(() => {
+        ctaButton.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+            ctaButton.style.transform = 'scale(1)';
+        }, 200);
+    }, 3000);
+}
+
+// Exit Intent Popup (Basic Implementation)
+let hasShownExitIntent = false;
+
+document.addEventListener('mouseleave', (e) => {
+    if (e.clientY <= 0 && !hasShownExitIntent) {
+        hasShownExitIntent = true;
+        // You can implement a popup here
+        console.log('Exit intent detected - show CTA popup');
+    }
+});
+
+// Track CTA Clicks (without interfering with mailto links)
+// Removed event listener to allow mailto links to work properly
+// The onclick attribute in HTML will handle tracking
+
+// Test CTA button functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const ctaButton = document.querySelector('.btn-cta');
+    if (ctaButton) {
+        console.log('CTA button found:', ctaButton);
+        console.log('CTA button href:', ctaButton.href);
+        
+        // Test click functionality
+        ctaButton.addEventListener('click', (e) => {
+            console.log('CTA button clicked successfully');
+            // Don't prevent default - let the mailto link work
+        });
+    } else {
+        console.log('CTA button not found');
+    }
+});
